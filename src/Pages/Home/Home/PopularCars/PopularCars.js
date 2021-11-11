@@ -13,7 +13,9 @@ const PopularCars = () => {
   }, []);
   return (
     <Container>
-      <h1 className="my-5 text-warning">POPULAR NEW CARS</h1>
+      <h1 className="my-5" style={{ color: "#f85f13" }}>
+        POPULAR NEW CARS
+      </h1>
       <Row lg={3} md={3} sm={2} xs={1} gap="1">
         {cars.slice(0, 6).map((car) => (
           <Car car={car}></Car>

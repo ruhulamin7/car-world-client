@@ -1,0 +1,32 @@
+.achievement {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("../../../images/banner-images/banner-2.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50vh;
+  background-attachment: fixed;
+  font-family: "Quicksand", sans-serif;
+  /* background-color: rgba(0, 0, 0, 0.986); */
+  background-blend-mode: luminosity;
+}
+.achievement h1 {
+  font-size: 70px;
+}
+.achievement h4 {
+  background-color: rgba(0, 0, 0, 0.425);
+  color: #f85f13;
+}
+.achievement p {
+  color: rgb(209, 205, 205);
+}
+
+/* responsive for small devices */
+@media (max-width: 992px) {
+  .achievement h1 {
+    font-size: 50px;
+  }
+  .achievement {
+    height: 100vh;
+  }
+}
