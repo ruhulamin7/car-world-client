@@ -14,7 +14,7 @@ const Banner = () => {
           <div className="w-50 me-auto">
             <h1>
               Find your dream car with
-              <span className="carworld"> carworld </span> !
+              <span className="carworld"> Carworld </span> !
             </h1>
             <p>
               It is a long established fact that a reader will distracted by the
@@ -30,7 +30,7 @@ const Banner = () => {
           <div className="">
             <h1>
               Find your dream car with
-              <span className="carworld"> carworld </span> !
+              <span className="carworld"> Carworld </span> !
             </h1>
             <p>
               It is a long established fact that a reader will distracted by the
@@ -46,7 +46,7 @@ const Banner = () => {
           <div className="w-50 ms-auto">
             <h1>
               Find your dream car with
-              <span className="carworld"> carworld </span> !
+              <span className="carworld"> Carworld </span> !
             </h1>
             <p>
               It is a long established fact that a reader will distracted by the

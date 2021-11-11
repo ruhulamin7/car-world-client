@@ -11,6 +11,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard/Dashboard";
 import Login from "./Pages/Login/Login/Login";
 import Register from "./Pages/Login/Register/Register";
 import PurchaseCar from "./Pages/PurchaseCar/PurchaseCar";
+import PrivateRoute from "./Pages/Login/PrivateRoute/PrivateRoute";
 
 function App() {
   return (
@@ -28,18 +29,18 @@ function App() {
             <Route exact path="/explore-all">
               <ExploreAll />
             </Route>
-            <Route exact path="/dashboard">
+            <PrivateRoute exact path="/dashboard">
               <Dashboard />
-            </Route>
+            </PrivateRoute>
             <Route exact path="/login">
               <Login />
             </Route>
             <Route exact path="/register">
               <Register />
             </Route>
-            <Route exact path="/puschase-car/:carId">
+            <PrivateRoute exact path="/puschase-car/:carId">
               <PurchaseCar />
-            </Route>
+            </PrivateRoute>
           </Switch>
           <Footer></Footer>
         </Router>

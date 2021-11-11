@@ -1,3 +1,4 @@
+import { LinearProgress } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
@@ -41,8 +42,11 @@ const PurchaseCar = () => {
       <h2 className="text-warning py-5">Purchase your dream car </h2>
       <div className="purchase-car-container">
         <div className="card mb-3 car-detail-info">
-          <div className="row g-0">
-            <div className="col-md-7">
+          <div
+            className="row g-0 display-flex "
+            style={{ alignItems: "center" }}
+          >
+            <div className="col-md-7 ps-3">
               <img
                 src={car.img}
                 className="img-fluid rounded-start"
@@ -51,8 +55,10 @@ const PurchaseCar = () => {
             </div>
             <div className="col-md-5">
               <div className="card-body">
-                <h5 className="card-title">Car Brand/Model: {car.brandName}</h5>
-                <p className="card-text">{car.description}</p>
+                <h5 className="card-title ">
+                  Car Brand/Model: {car.brandName}
+                </h5>
+                <p className="card-text m-2">{car.description}</p>
                 <span className="d-flex border">
                   <b>{car.model}</b>
                   <b className="ms-auto text-warning">$ {car.price}</b>
@@ -61,6 +67,7 @@ const PurchaseCar = () => {
             </div>
           </div>
         </div>
+
         <div className="car-detail-form">
           <h4> Give us your details please</h4>
           <form onSubmit={handleSubmit(onSubmit)}>

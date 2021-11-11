@@ -28,7 +28,7 @@ const Navigation = () => {
 
               {user?.email ? (
                 <button className="btn btn-warning" onClick={logOut}>
-                  Logout
+                  Logout {user.email}
                 </button>
               ) : (
                 <Nav.Link as={Link} to="/login">

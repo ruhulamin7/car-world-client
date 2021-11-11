@@ -2,29 +2,80 @@ import {
   getAuth,
   signInWithPopup,
   GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
 import { useEffect, useState } from "react";
-// import { set } from "react-hook-form";
-import initializeFirebaseAuthentication from "../firebase/firebase.init";
+import Swal from "sweetalert2";
+import initializeFirebase from "../Pages/Login/Firebase/firebase.init";
 
-initializeFirebaseAuthentication();
+// import { set } from "react-hook-form";
+// import initializeFirebase from "../firebase/firebase.init";
+// import initializeFirebaseAuthentication from "../Pages/Login/Firebase/firebase.init";
+// initializeFirebaseAuthentication();
+
+initializeFirebase();
 
 const useFirebase = () => {
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState();
 
   const auth = getAuth();
   const googleProvider = new GoogleAuthProvider();
 
-  const signInUsingGoogle = () => {
+  const signInUsingGoogle = (location, history) => {
     setIsLoading(true);
-    return signInWithPopup(auth, googleProvider);
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        const user = result.user;
+        const uri = location?.state?.from || "/";
+        history.push(uri);
+        logInModal();
+      })
+      .catch((error) => {
+        setError(error.message);
+        errorModal();
+      })
+      .finally(() => setIsLoading(false));
   };
 
+  const registerUser = (email, password, location, history) => {
+    setIsLoading(true);
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const uri = location?.state?.from || "/";
+        history.push(uri);
+
+        registrationModal();
+      })
+      .catch((error) => {
+        setError(error.message);
+        errorModal();
+      })
+      .finally(() => setIsLoading(false));
+  };
+
+  const loginUser = (email, password, location, history) => {
+    setIsLoading(true);
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const uri = location?.state?.from || "/";
+        history.push(uri);
+        logInModal();
+      })
+      .catch((error) => {
+        setError(error.message);
+        errorModal();
+      })
+      .finally(() => setIsLoading(false));
+  };
+
+  // user state observer
   useEffect(() => {
-    const unsubscribed = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
       } else {
@@ -32,26 +83,68 @@ const useFirebase = () => {
       }
       setIsLoading(false);
     });
-    return () => unsubscribed;
+    return () => unsubscribe;
   }, []);
 
   const logOut = () => {
     setIsLoading(true);
     signOut(auth)
       .then(() => {
-        // Sign-out successful.
+        logOutModal();
       })
       .catch((error) => {
-        // An error happened.
+        setError(error.message);
+        errorModal();
       })
       .finally(() => setIsLoading(false));
   };
 
+  const registrationModal = () => {
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Registration Successfull",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
+
+  const logInModal = () => {
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Login Successfull",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
+
+  const logOutModal = () => {
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Logout Successfull",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
+
+  const errorModal = () => {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: `${error}`,
+    });
+  };
+
   return {
-    signInUsingGoogle,
     user,
+    signInUsingGoogle,
+    registerUser,
+    loginUser,
     logOut,
     isLoading,
+    error,
   };
 };
 
