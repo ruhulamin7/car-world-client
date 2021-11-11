@@ -1,0 +1,24 @@
+.purchase-car-container {
+  display: flex;
+}
+.car-detail-info {
+  width: 60%;
+}
+.car-detail-form {
+  width: 40%;
+}
+.car-detail-form form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.car-detail-form form input,
+.address-field {
+  width: 80%;
+  margin-top: 20px;
+}
+textarea {
+  margin-top: 20px;
+}

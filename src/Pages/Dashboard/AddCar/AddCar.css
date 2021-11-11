@@ -1,0 +1,22 @@
+.add-car form,
+select {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.add-car form input,
+.add-car form select,
+.description-field {
+  width: 40%;
+  margin-top: 20px;
+
+  padding: 5px;
+
+  outline: 0;
+  border: 0;
+  border-bottom: 1px solid gray;
+}
+textarea {
+  margin-top: 20px;
+}

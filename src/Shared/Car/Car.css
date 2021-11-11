@@ -1,0 +1,17 @@
+.btn-purchase {
+  background-color: #2297c5;
+  color: white;
+  outline: 0;
+  border: 0;
+  padding: 5px 10px;
+}
+.btn-purchase:hover {
+  background-color: #08506d;
+}
+
+.price,
+.model {
+  color: #f85f13;
+  font-size: 20px;
+  font-weight: 700;
+}

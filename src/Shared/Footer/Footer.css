@@ -1,0 +1,47 @@
+footer {
+  background-color: #030a0a;
+  text-align: center;
+  color: #666;
+}
+.footer-container {
+  text-align: left;
+  display: flex;
+  padding: 20px;
+}
+.footer-logo {
+  width: 150px;
+}
+.footer-address {
+  font-size: 14px;
+  text-align: left;
+}
+.usefull-links {
+  display: flex;
+}
+.usefull-links .ul-right {
+  margin-left: 40px;
+}
+.usefull-links ul {
+  padding: 0;
+}
+.usefull-links ul li {
+  list-style: none;
+}
+.recent-post a,
+.usefull-links ul li a {
+  text-decoration: none;
+  color: #777;
+}
+.recent-post a:hover,
+.usefull-links ul li a:hover {
+  color: #ea8320;
+}
+.postImage1 img,
+.postImage2 img {
+  width: 100px;
+  height: 40px;
+  border-radius: 5px;
+  margin-right: 20px;
+  padding-top: 10px;
+  border: 1px solid white;
+}
