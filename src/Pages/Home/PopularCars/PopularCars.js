@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
-import useAuth from "../../../../hooks/useAuth";
-import Car from "../../../../Shared/Car/Car";
+import Car from "../../../Shared/Car/Car";
 
 const PopularCars = () => {
   const [cars, setCars] = useState([]);

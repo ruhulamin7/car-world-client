@@ -5,6 +5,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
+  updateProfile,
   signOut,
 } from "firebase/auth";
 import { useEffect, useState } from "react";
@@ -42,13 +43,26 @@ const useFirebase = () => {
       .finally(() => setIsLoading(false));
   };
 
-  const registerUser = (email, password, location, history) => {
+  const registerUser = (email, password, name, history) => {
     setIsLoading(true);
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        const uri = location?.state?.from || "/";
-        history.push(uri);
+        const newUser = { email: email, displayName: name };
+        setUser(newUser);
 
+        //  send name to firebase after creation
+        updateProfile(auth.currentUser, {
+          displayName: name,
+        })
+          .then(() => {
+            // Profile updated!
+          })
+          .catch((error) => {
+            setError(error.message);
+            errorModal();
+          });
+
+        history.push("/");
         registrationModal();
       })
       .catch((error) => {

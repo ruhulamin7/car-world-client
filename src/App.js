@@ -18,7 +18,6 @@ function App() {
     <div className="App">
       <AuthProvider>
         <Router>
-          <Navigation></Navigation>
           <Switch>
             <Route exact path="/">
               <Home />
@@ -42,7 +41,6 @@ function App() {
               <PurchaseCar />
             </PrivateRoute>
           </Switch>
-          <Footer></Footer>
         </Router>
       </AuthProvider>
     </div>

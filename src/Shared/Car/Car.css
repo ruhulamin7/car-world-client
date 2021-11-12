@@ -1,17 +1,25 @@
+/* .car-card .btn-purchase {
+  text-align: left;
+} */
 .btn-purchase {
   background-color: #f85f13;
   color: white;
   outline: 0;
   border: 0;
-  padding: 10px 10px;
+  padding: 10px;
+  margin-top: 10px;
 }
 .btn-purchase:hover {
   background-color: #d64d09;
 }
 
-.price,
-.model {
+.price {
   color: #f85f13;
   font-size: 20px;
+  font-weight: 700;
+}
+.model {
+  color: gray;
+  font-size: 16px;
   font-weight: 700;
 }

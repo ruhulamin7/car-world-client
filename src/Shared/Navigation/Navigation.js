@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import React from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
@@ -21,18 +22,24 @@ const Navigation = () => {
               <Nav.Link as={Link} to="/explore-all">
                 Explore All
               </Nav.Link>
-
-              <Nav.Link as={Link} to="/dashboard">
-                Dashboard
-              </Nav.Link>
+              {user?.email && (
+                <Nav.Link as={Link} to="/dashboard">
+                  Dashboard
+                </Nav.Link>
+              )}
 
               {user?.email ? (
                 <button className="btn btn-warning" onClick={logOut}>
-                  Logout {user.email}
+                  Logout
                 </button>
               ) : (
                 <Nav.Link as={Link} to="/login">
-                  Login
+                  <button
+                    className="btn"
+                    style={{ backgroundColor: "#f85f13", color: "#fff" }}
+                  >
+                    Login
+                  </button>
                 </Nav.Link>
               )}
             </Nav>

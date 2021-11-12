@@ -1,6 +1,9 @@
+import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import Car from "../../../Shared/Car/Car";
+import Footer from "../../../Shared/Footer/Footer";
+import Navigation from "../../../Shared/Navigation/Navigation";
 
 const ExploreAll = () => {
   const [cars, setCars] = useState([]);
@@ -12,17 +15,20 @@ const ExploreAll = () => {
   }, []);
 
   return (
-    <Container>
-      <div className="my-5">
-        <h2 className="text-warning ">All Cars</h2>
-        <p>We have a unique way of meeting your adventurous expectations!</p>
-      </div>
-      <Row lg={3} md={3} sm={2} xs={1} className="tours-container text-start">
-        {cars.map((car) => (
-          <Car key={car._id} car={car}></Car>
-        ))}
-      </Row>
-    </Container>
+    <Box>
+      <Navigation></Navigation>
+      <Container>
+        <h1 className="my-5" style={{ color: "#f85f13" }}>
+          All CARS
+        </h1>
+        <Row lg={3} md={3} sm={2} xs={1} className="tours-container text-start">
+          {cars.map((car) => (
+            <Car key={car._id} car={car}></Car>
+          ))}
+        </Row>
+      </Container>
+      <Footer></Footer>
+    </Box>
   );
 };
 

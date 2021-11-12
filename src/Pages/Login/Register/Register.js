@@ -12,8 +12,7 @@ import Swal from "sweetalert2";
 
 const Register = () => {
   const [loginData, setLoginData] = useState({});
-  const { registerUser, isLoading, user, authError, signInUsingGoogle } =
-    useAuth();
+  const { registerUser, isLoading, user, signInUsingGoogle } = useAuth();
 
   const handleOnBlur = (e) => {
     const field = e.target.name;
@@ -113,12 +112,6 @@ const Register = () => {
           )}
 
           {isLoading && <LinearProgress />}
-          {/* {user.email && (
-            <Alert severity="success">
-              Registration Successfull —Please check it out!
-            </Alert>
-          )} */}
-          {authError && <Alert severity="error">{authError}</Alert>}
         </Grid>
       </Grid>
     </Container>
