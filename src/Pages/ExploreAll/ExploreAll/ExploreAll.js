@@ -9,7 +9,7 @@ const ExploreAll = () => {
   const [cars, setCars] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/cars")
+    fetch("https://shielded-dawn-55052.herokuapp.com/cars")
       .then((res) => res.json())
       .then((data) => setCars(data));
   }, []);

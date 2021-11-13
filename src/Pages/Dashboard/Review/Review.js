@@ -12,23 +12,25 @@ const Review = () => {
   const [reviews, setReviews] = useState({});
   const { register, handleSubmit, reset, setValue } = useForm();
   const onSubmit = (data) => {
-    axios.post("http://localhost:5000/reviews", data).then((res) => {
-      if (res.data.insertedId) {
-        // order successfull modal
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Thanks for review us",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        reset();
-      }
-    });
+    axios
+      .post("https://shielded-dawn-55052.herokuapp.com/reviews", data)
+      .then((res) => {
+        if (res.data.insertedId) {
+          // order successfull modal
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Thanks for review us",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          reset();
+        }
+      });
   };
 
   //   useEffect(() => {
-  //     fetch(`http://localhost:5000/reviews/`)
+  //     fetch(`https://shielded-dawn-55052.herokuapp.com/reviews/`)
   //       .then((res) => res.json())
   //       .then((data) => {
   //         setReviews(data);

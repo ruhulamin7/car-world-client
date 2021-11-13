@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import useAuth from "../../../hooks/useAuth";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -36,7 +35,7 @@ const ManageOrders = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/orders`)
+    fetch(`https://shielded-dawn-55052.herokuapp.com/orders`)
       .then((res) => res.json())
       .then((data) => setOrders(data));
   }, [orders]);
@@ -45,7 +44,7 @@ const ManageOrders = () => {
   const handleDeleteOrder = (id) => {
     const proceed = window.confirm("Are you sure, you want to delete?");
     if (proceed) {
-      const url = `http://localhost:5000/orders/${id}`;
+      const url = `https://shielded-dawn-55052.herokuapp.com/orders/${id}`;
       fetch(url, {
         method: "DELETE",
       })
@@ -61,7 +60,9 @@ const ManageOrders = () => {
   // update order
   const handleUpdateStatus = (id) => {
     axios
-      .put(`http://localhost:5000/orders/${id}`, { status: "Approved" })
+      .put(`https://shielded-dawn-55052.herokuapp.com/orders/${id}`, {
+        status: "Approved",
+      })
       .then((res) => {
         console.log(res);
         if (res.data.matchedCount > 0) {

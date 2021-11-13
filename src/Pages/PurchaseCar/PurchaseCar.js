@@ -19,23 +19,25 @@ const PurchaseCar = () => {
   const { register, handleSubmit, reset, setValue } = useForm();
   const onSubmit = (data) => {
     data.status = "Pending";
-    axios.post("http://localhost:5000/orders", data).then((res) => {
-      if (res.data.insertedId) {
-        // order successfull modal
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Order Successfull",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        reset();
-      }
-    });
+    axios
+      .post("https://shielded-dawn-55052.herokuapp.com/orders", data)
+      .then((res) => {
+        if (res.data.insertedId) {
+          // order successfull modal
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Order Successfull",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          reset();
+        }
+      });
   };
 
   useEffect(() => {
-    fetch(`http://localhost:5000/cars/${carId}`)
+    fetch(`https://shielded-dawn-55052.herokuapp.com/cars/${carId}`)
       .then((res) => res.json())
       .then((data) => {
         setCar(data);

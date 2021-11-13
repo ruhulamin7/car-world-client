@@ -36,7 +36,7 @@ const ManageProducts = () => {
   const [products, setproducts] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/cars`)
+    fetch(`https://shielded-dawn-55052.herokuapp.com/cars`)
       .then((res) => res.json())
       .then((data) => setproducts(data));
   }, [products]);
@@ -45,7 +45,7 @@ const ManageProducts = () => {
   const handleDeleteProduct = (id) => {
     const proceed = window.confirm("Are you sure, you want to delete?");
     if (proceed) {
-      const url = `http://localhost:5000/cars/${id}`;
+      const url = `https://shielded-dawn-55052.herokuapp.com/cars/${id}`;
       fetch(url, {
         method: "DELETE",
       })

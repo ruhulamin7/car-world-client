@@ -8,12 +8,14 @@ const AddCar = () => {
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     console.log(data);
-    axios.post("http://localhost:5000/cars", data).then((res) => {
-      if (res.data.insertedId) {
-        alert("Car added successfully");
-        reset();
-      }
-    });
+    axios
+      .post("https://shielded-dawn-55052.herokuapp.com/cars", data)
+      .then((res) => {
+        if (res.data.insertedId) {
+          alert("Car added successfully");
+          reset();
+        }
+      });
   };
   return (
     <Container>
