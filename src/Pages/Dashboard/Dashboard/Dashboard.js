@@ -23,7 +23,9 @@ import DashboardHome from "../DashboardHome/DashboardHome";
 import MakeAdmin from "../MakeAdmin/MakeAdmin";
 import Payment from "../Payment/Payment";
 import useAuth from "../../../hooks/useAuth";
+import AddCar from "../AddCar/AddCar";
 import AdminRoute from "../../Login/AdminRoute/AdminRoute";
+import ManageProducts from "../ManageProducts/ManageProducts";
 
 const drawerWidth = 240;
 
@@ -31,7 +33,7 @@ function Dashboard(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   let { path, url } = useRouteMatch();
-  const { admin, user } = useAuth();
+  const { admin, user, logOut } = useAuth();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -43,14 +45,28 @@ function Dashboard(props) {
       <Divider />
 
       <Link to="/home">
-        <Button variant="contained">Home</Button>
+        <Button variant="contained" sx={{ m: 2 }}>
+          Home
+        </Button>
       </Link>
       <Link to={`${url}`}>
-        <Button variant="contained">Dashboard</Button>
+        <Button sx={{ m: 2 }} variant="contained">
+          Dashboard
+        </Button>
       </Link>
 
       {admin ? (
         <Box>
+          <Link to={`${url}/addProduct`}>
+            <Button variant="contained" sx={{ my: 1 }}>
+              Add Product
+            </Button>
+          </Link>
+          <Link to={`${url}/manageProducts`}>
+            <Button variant="contained" sx={{ my: 1 }}>
+              Manage Product
+            </Button>
+          </Link>
           <Link to={`${url}/manageOrders`}>
             <Button variant="contained" sx={{ my: 1 }}>
               Manage All Orders
@@ -65,19 +81,25 @@ function Dashboard(props) {
       ) : (
         <Box>
           <Link to={`${url}/myOrders`}>
-            <Button variant="contained" sx={{ my: 1 }}>
+            <Button variant="contained" sx={{ m: 2 }}>
               My Orders
             </Button>
           </Link>
           <Link to={`${url}/payment`}>
-            <Button variant="contained" sx={{ my: 1 }}>
+            <Button variant="contained" sx={{ m: 2 }}>
               Payment
             </Button>
           </Link>
         </Box>
       )}
 
-      <List>
+      {user.email && (
+        <button className="btn btn-warning m-2" onClick={logOut}>
+          Logout
+        </button>
+      )}
+
+      {/* <List>
         {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
           <ListItem button key={text}>
             <ListItemIcon>
@@ -86,7 +108,7 @@ function Dashboard(props) {
             <ListItemText primary={text} />
           </ListItem>
         ))}
-      </List>
+      </List> */}
     </div>
   );
 
@@ -177,6 +199,13 @@ function Dashboard(props) {
           <Route path={`${path}/payment`}>
             <Payment></Payment>
           </Route>
+          <AdminRoute path={`${path}/addProduct`}>
+            <AddCar></AddCar>
+          </AdminRoute>
+
+          <AdminRoute path={`${path}/manageProducts`}>
+            <ManageProducts></ManageProducts>
+          </AdminRoute>
 
           <AdminRoute path={`${path}/manageOrders`}>
             <ManageOrders></ManageOrders>
