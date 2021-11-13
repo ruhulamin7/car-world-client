@@ -1,0 +1,17 @@
+.review-form {
+  display: flex;
+  justify-content: center;
+}
+.review-form input {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.textarea-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20px;
+}

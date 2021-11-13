@@ -26,6 +26,7 @@ import useAuth from "../../../hooks/useAuth";
 import AddCar from "../AddCar/AddCar";
 import AdminRoute from "../../Login/AdminRoute/AdminRoute";
 import ManageProducts from "../ManageProducts/ManageProducts";
+import Review from "../Review/Review";
 
 const drawerWidth = 240;
 
@@ -88,6 +89,11 @@ function Dashboard(props) {
           <Link to={`${url}/payment`}>
             <Button variant="contained" sx={{ m: 2 }}>
               Payment
+            </Button>
+          </Link>
+          <Link to={`${url}/review`}>
+            <Button variant="contained" sx={{ m: 2 }}>
+              Review Us
             </Button>
           </Link>
         </Box>
@@ -198,6 +204,9 @@ function Dashboard(props) {
           </Route>
           <Route path={`${path}/payment`}>
             <Payment></Payment>
+          </Route>
+          <Route path={`${path}/review`}>
+            <Review></Review>
           </Route>
           <AdminRoute path={`${path}/addProduct`}>
             <AddCar></AddCar>
