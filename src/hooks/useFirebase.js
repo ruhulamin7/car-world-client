@@ -32,9 +32,11 @@ const useFirebase = () => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
         const user = result.user;
+
         const uri = location?.state?.from || "/";
         history.push(uri);
         logInModal();
+        saveUserToDatabase(user.email, user.displayName, "PUT");
       })
       .catch((error) => {
         setError(error.message);
@@ -49,6 +51,8 @@ const useFirebase = () => {
       .then((userCredential) => {
         const newUser = { email: email, displayName: name };
         setUser(newUser);
+        // save user to the database
+        saveUserToDatabase(email, name, "POST");
 
         //  send name to firebase after creation
         updateProfile(auth.currentUser, {
@@ -111,6 +115,17 @@ const useFirebase = () => {
         errorModal();
       })
       .finally(() => setIsLoading(false));
+  };
+
+  const saveUserToDatabase = (email, displayName, method) => {
+    const user = { email, displayName };
+    fetch("http://localhost:5000/users", {
+      method: method,
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    }).then();
   };
 
   const registrationModal = () => {

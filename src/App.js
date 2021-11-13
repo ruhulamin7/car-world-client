@@ -28,7 +28,7 @@ function App() {
             <Route exact path="/explore-all">
               <ExploreAll />
             </Route>
-            <PrivateRoute exact path="/dashboard">
+            <PrivateRoute path="/dashboard">
               <Dashboard />
             </PrivateRoute>
             <Route exact path="/login">

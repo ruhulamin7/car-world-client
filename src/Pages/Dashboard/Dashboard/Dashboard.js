@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
+import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import List from "@mui/material/List";
@@ -17,12 +18,25 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import ManageOrders from "../ManageOrders/ManageOrders";
 import MyOrders from "../MyOrders/MyOrders";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams,
+  useRouteMatch,
+} from "react-router-dom";
+import DashboardHome from "../DashboardHome/DashboardHome";
+import MakeAdmin from "../MakeAdmin/MakeAdmin";
+import Payment from "../Payment/Payment";
 
 const drawerWidth = 240;
 
 function Dashboard(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  let { path, url } = useRouteMatch();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -32,6 +46,35 @@ function Dashboard(props) {
     <div>
       <Toolbar />
       <Divider />
+
+      <Link to="/home">
+        <Button variant="contained">Home</Button>
+      </Link>
+      <Link to={`${url}`}>
+        <Button variant="contained">Dashboard</Button>
+      </Link>
+
+      <Link to={`${url}/myOrders`}>
+        <Button variant="contained" sx={{ my: 1 }}>
+          My Orders
+        </Button>
+      </Link>
+      <Link to={`${url}/manageOrders`}>
+        <Button variant="contained" sx={{ my: 1 }}>
+          Manage All Orders
+        </Button>
+      </Link>
+      <Link to={`${url}/makeAdmin`}>
+        <Button variant="contained" sx={{ my: 1 }}>
+          Make an Admin
+        </Button>
+      </Link>
+      <Link to={`${url}/payment`}>
+        <Button variant="contained" sx={{ my: 1 }}>
+          Payment
+        </Button>
+      </Link>
+
       <List>
         {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
           <ListItem button key={text}>
@@ -121,8 +164,26 @@ function Dashboard(props) {
       >
         <Toolbar />
 
-        <MyOrders></MyOrders>
-        <ManageOrders></ManageOrders>
+        <Switch>
+          <Route exact path={path}>
+            <DashboardHome></DashboardHome>
+          </Route>
+          <Route path={`${path}/myOrders`}>
+            <MyOrders></MyOrders>
+          </Route>
+          <Route path={`${path}/manageOrders`}>
+            <ManageOrders></ManageOrders>
+          </Route>
+          <Route path={`${path}/makeAdmin`}>
+            <MakeAdmin></MakeAdmin>
+          </Route>
+          <Route path={`${path}/payment`}>
+            <Payment></Payment>
+          </Route>
+        </Switch>
+
+        {/* <MyOrders></MyOrders> */}
+        {/* <ManageOrders></ManageOrders> */}
       </Box>
     </Box>
   );
