@@ -18,25 +18,20 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import ManageOrders from "../ManageOrders/ManageOrders";
 import MyOrders from "../MyOrders/MyOrders";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams,
-  useRouteMatch,
-} from "react-router-dom";
+import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
 import DashboardHome from "../DashboardHome/DashboardHome";
 import MakeAdmin from "../MakeAdmin/MakeAdmin";
 import Payment from "../Payment/Payment";
+import useAuth from "../../../hooks/useAuth";
+import AdminRoute from "../../Login/AdminRoute/AdminRoute";
 
 const drawerWidth = 240;
 
 function Dashboard(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
   let { path, url } = useRouteMatch();
+  const { admin, user } = useAuth();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -54,26 +49,33 @@ function Dashboard(props) {
         <Button variant="contained">Dashboard</Button>
       </Link>
 
-      <Link to={`${url}/myOrders`}>
-        <Button variant="contained" sx={{ my: 1 }}>
-          My Orders
-        </Button>
-      </Link>
-      <Link to={`${url}/manageOrders`}>
-        <Button variant="contained" sx={{ my: 1 }}>
-          Manage All Orders
-        </Button>
-      </Link>
-      <Link to={`${url}/makeAdmin`}>
-        <Button variant="contained" sx={{ my: 1 }}>
-          Make an Admin
-        </Button>
-      </Link>
-      <Link to={`${url}/payment`}>
-        <Button variant="contained" sx={{ my: 1 }}>
-          Payment
-        </Button>
-      </Link>
+      {admin ? (
+        <Box>
+          <Link to={`${url}/manageOrders`}>
+            <Button variant="contained" sx={{ my: 1 }}>
+              Manage All Orders
+            </Button>
+          </Link>
+          <Link to={`${url}/makeAdmin`}>
+            <Button variant="contained" sx={{ my: 1 }}>
+              Make an Admin
+            </Button>
+          </Link>
+        </Box>
+      ) : (
+        <Box>
+          <Link to={`${url}/myOrders`}>
+            <Button variant="contained" sx={{ my: 1 }}>
+              My Orders
+            </Button>
+          </Link>
+          <Link to={`${url}/payment`}>
+            <Button variant="contained" sx={{ my: 1 }}>
+              Payment
+            </Button>
+          </Link>
+        </Box>
+      )}
 
       <List>
         {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
@@ -112,7 +114,7 @@ function Dashboard(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Dashboard
+            {user.displayName}'s Dashboard
           </Typography>
         </Toolbar>
       </AppBar>
@@ -168,18 +170,20 @@ function Dashboard(props) {
           <Route exact path={path}>
             <DashboardHome></DashboardHome>
           </Route>
+
           <Route path={`${path}/myOrders`}>
             <MyOrders></MyOrders>
-          </Route>
-          <Route path={`${path}/manageOrders`}>
-            <ManageOrders></ManageOrders>
-          </Route>
-          <Route path={`${path}/makeAdmin`}>
-            <MakeAdmin></MakeAdmin>
           </Route>
           <Route path={`${path}/payment`}>
             <Payment></Payment>
           </Route>
+
+          <AdminRoute path={`${path}/manageOrders`}>
+            <ManageOrders></ManageOrders>
+          </AdminRoute>
+          <AdminRoute path={`${path}/makeAdmin`}>
+            <MakeAdmin></MakeAdmin>
+          </AdminRoute>
         </Switch>
 
         {/* <MyOrders></MyOrders> */}

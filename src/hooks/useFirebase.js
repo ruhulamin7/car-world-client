@@ -23,6 +23,7 @@ const useFirebase = () => {
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
+  const [admin, setAdmin] = useState(false);
 
   const auth = getAuth();
   const googleProvider = new GoogleAuthProvider();
@@ -128,6 +129,13 @@ const useFirebase = () => {
     }).then();
   };
 
+  // getting admin user
+  useEffect(() => {
+    fetch(`http://localhost:5000/users/${user.email}`)
+      .then((res) => res.json())
+      .then((data) => setAdmin(data.admin));
+  }, [user.email]);
+
   const registrationModal = () => {
     Swal.fire({
       position: "center",
@@ -168,6 +176,7 @@ const useFirebase = () => {
 
   return {
     user,
+    admin,
     signInUsingGoogle,
     registerUser,
     loginUser,
