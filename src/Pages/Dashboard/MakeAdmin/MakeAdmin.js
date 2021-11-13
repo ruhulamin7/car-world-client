@@ -74,7 +74,6 @@ const MakeAdmin = () => {
           </Grid>
         </Box>
       </form>
-      {/* {success && <Alert severity="success">Made Admin successfully!</Alert>} */}
     </div>
   );
 };

@@ -12,11 +12,6 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import initializeFirebase from "../Pages/Login/Firebase/firebase.init";
 
-// import { set } from "react-hook-form";
-// import initializeFirebase from "../firebase/firebase.init";
-// import initializeFirebaseAuthentication from "../Pages/Login/Firebase/firebase.init";
-// initializeFirebaseAuthentication();
-
 initializeFirebase();
 
 const useFirebase = () => {
